@@ -36,7 +36,7 @@ jobs:
       # Passo 5: Executa os Testes de API do Postman com Newman
       - name: 'Executar Testes de API'
         run: |
-          newman run ./tests/postman/minha_colecao.json -e ./tests/postman/meu_ambiente_dev.json \
+          newman run ./tests/postman/ServeRest.postman_collection.json -e ./tests/postman/ServeRest_Local.postman_environment.json \
           --reporters cli,htmlextra --reporter-htmlextra-export newman-report.html
         # Adapte os caminhos dos arquivos JSON (.minha_colecao.json e .meu_ambiente_dev.json)
         # para onde eles estão no seu repositório.
