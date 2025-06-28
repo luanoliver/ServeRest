@@ -1,0 +1,100 @@
+{
+	"info": {
+		"_postman_id": "1ee0857d-de1a-42ea-967d-84d397671c35",
+		"name": "ServeRest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45908009",
+		"_collection_link": "https://luan-2869730.postman.co/workspace/e2c0a298-ed7f-4f1c-8335-6362ee26c3ae/collection/45908009-1ee0857d-de1a-42ea-967d-84d397671c35?action=share&source=collection_link&creator=45908009"
+	},
+	"item": [
+		{
+			"name": "GET usuários",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status da requisição é 200 OK\", function () {",
+							"    pm.response.to.have.status(200); // Valida se o status HTTP é 200",
+							"});",
+							"",
+							"pm.test(\"Resposta é um array (lista)\", function () {",
+							"    const responseJson = pm.response.json(); // Pega o corpo da resposta como JSON",
+							"    pm.expect(Array.isArray(responseJson.usuarios)).to.be.true; ",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status da requisição é 201 Created\", function () {",
+							"    pm.response.to.have.status(201); // Valida se o status HTTP é 201",
+							"});",
+							"",
+							"pm.test(\"Mensagem de sucesso ao cadastrar usuário\", function () {",
+							"    const responseJson = pm.response.json();",
+							"    pm.expect(responseJson.message).to.eql(\"Cadastro realizado com sucesso\"); // Valida a mensagem específica",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"nome\": \"João da Silva\",\n  \"email\": \"joao.silva.1@example.com\",\n  \"password\": \"senha123\",\n  \"administrador\": \"true\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuarios",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuarios"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
